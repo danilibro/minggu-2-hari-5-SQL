@@ -1,0 +1,86 @@
+=========== No 1 ==========
+create database myshop;
+
+=========== No 2 ==========
+use myshop;
+
+create table users(
+id int AUTO_INCREMENT,
+name varchar(255),
+email varchar(255),
+password varchar(255),
+Primary key(id)
+);
+
+describe users;
+
+create table items(
+id int AUTO_INCREMENT,
+name varchar(255),
+description varchar(255),
+price int,
+stock int,
+category_id int,
+Primary key(id)
+);
+
+describe items;
+
+create table categories(
+id int AUTO_INCREMENT,
+name varchar(255),
+Primary key(id)
+);
+
+describe categories;
+
+alter table items
+add foreign key (category_id) references categories(id);
+describe items;
+
+========= No 3 ===============
+
+INSERT INTO users(name, email, password)
+VALUES("John Doe", "john@doe.com", "john123"),
+("John Doe", "john@doe.com", "john123");
+
+select * from users;
+
+INSERT INTO categories(name)
+VALUES("gadget"),
+("cloth"),
+("men"),
+("women"),
+("branded");
+
+select * from categories;
+
+INSERT INTO items(name, description, price, stock, category_id)
+VALUES("Sumsang b50", "hape keren dari merek samsung", 4000000, 100, 1),
+("Uniklooh", "baju keren dari brand ternama", 500000, 50, 2),
+("IMHO Watch", "jam tangan anak yang jujur banget", 2000000, 10, 1);
+
+select * from items;
+
+========== No 4 a ==========
+select id, name, email from users;
+
+========== No 4 b ==========
+select * from items
+where price>1000000; 
+
+select * from items
+where name like '%uniklo%';
+
+========== No 4 c ===========
+select items.name, items.description, items.price, items.stock,
+items.category_id, categories.name as kategori
+from items join categories
+where items.id = categories.id;
+
+=========== No 5 =============
+UPDATE items
+SET price = 2500000
+WHERE name LIKE '%sumsang%';
+
+select * from items;
